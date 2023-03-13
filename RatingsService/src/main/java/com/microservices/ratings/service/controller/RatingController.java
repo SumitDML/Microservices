@@ -29,6 +29,10 @@ public class RatingController {
         ratings.setRatingId(ratingId);
         return ResponseEntity.status(HttpStatus.CREATED).body(ratingService.create(ratings));
     }
+    @GetMapping
+    public ResponseEntity<List<Ratings>>  getRatings(){
+        return ResponseEntity.status(HttpStatus.OK).body(ratingService.getRatings());
+    }
 
     @GetMapping("/users/{userId}")
     public ResponseEntity<List<Ratings>>  getRatingsByUserId(@PathVariable String userId){
@@ -39,11 +43,11 @@ public class RatingController {
         return ResponseEntity.status(HttpStatus.OK).body(ratingService.getRatingsByHotelId(hotelId));
     }
 
-    @PutMapping("/ratings/{ratingId}")
+    @PutMapping("/{ratingId}")
     public ResponseEntity<Ratings>  updateRating(@PathVariable String ratingId,@RequestBody Ratings rating) {
         return ResponseEntity.status(HttpStatus.OK).body(ratingService.updateRatings(ratingId, rating));
     }
-    @DeleteMapping("/ratings/{ratingId}")
+    @DeleteMapping("/{ratingId}")
     public void deleteRatings(@PathVariable String ratingId){
         ratingService.deleteRatings(ratingId);
     }
